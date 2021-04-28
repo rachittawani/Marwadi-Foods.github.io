@@ -1,0 +1,22 @@
+body{
+    font-family: "Montserrat";
+}
+#title{
+    background-color: #3cb371;
+    color: #fff;
+}
+.navbar{
+    padding:0 0 0.5rem;
+    margin: 0;
+}
+
+.navbar-brand{
+    font-family: "Ubuntu";
+    display: inline-block;
+	text-align: right;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.container-fluid{
+    padding: 2% 10% 2%;
+}

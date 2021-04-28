@@ -1,0 +1,59 @@
+<?php
+session_start();
+$conn = new mysqli("localhost", "root", "", "marwadi_foods");
+if(isset($_POST['Add_To_Cart']))
+{
+	$sql="CALL  `getproduct`('".$_POST["Email"]."','".$_POST["pid"]."','".$_POST["Quantity"]."','".$_POST["Price"]*$_POST["Quantity"]."');";
+	$res=$conn->query($sql);
+}
+if($_SERVER["REQUEST_METHOD"]=="POST")
+{
+	if(isset($_POST['Add_To_Cart']))
+	{
+		if(isset($_SESSION['cart']))
+		{
+			$myItems=array_column($_SESSION['cart'],'Item_name');
+			if(in_array($_POST['Item_name'],$myItems))
+			{
+				echo"<script>
+						alert('Item Already Added');
+						window.location.href='home.php';
+					</script>";
+			}
+			else
+			{
+				$count=count($_SESSION['cart']);
+				$_SESSION['cart'][$count]=array('Pid'=>$_POST['pid'],'Item_name'=>$_POST['Item_name'],'Price'=>$_POST['Price'],'Quantity'=>$_POST['Quantity']);
+				print_r($_SESSION['cart']);
+				echo"<script>
+						window.location.href='home.php';
+					</script>";
+			}
+		}
+		else
+		{
+			$_SESSION['cart'][0]=array('Pid'=>$_POST['pid'],'Item_name'=>$_POST['Item_name'],'Price'=>$_POST['Price'],'Quantity'=>$_POST['Quantity']);
+			echo"<script>
+					window.location.href='home.php';
+				</script>";
+		}
+	}
+	if(isset($_POST['Remove_Item']))
+	{	
+		foreach ($_SESSION['cart'] as $key =>$value) 
+		{
+			if($value['Item_name']==$_POST['Item_name'])
+			{
+				$sql="CALL  `deleteproduct`('".$value['Pid']."');";
+				$res=$conn->query($sql);
+				unset($_SESSION['cart'][$key]);
+				$_SESSION['cart']=array_values($_SESSION['cart']);
+				echo"<script>
+						window.location.href='mycart.php';
+					</script>
+				";
+			}
+		}
+	}
+}
+?>

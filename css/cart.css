@@ -1,0 +1,46 @@
+#title{
+    background-color: #3cb371;
+    color: #fff;
+}
+.container-fluid{
+    background-color: black;
+    padding: 2% 10% 2%;
+}
+.custom-padding{
+    padding: 2% 10% 7%;
+}
+.navbar{
+    padding:0 0 0.5rem;
+}
+
+.navbar-brand{
+    font-family: "Ubuntu";
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.navbar-item{
+    padding: 0 20px;
+}
+.nav-link{
+    font-size: 2rem;
+    font-family: "Montserrat";
+}
+#footer{
+    background-color: #3cb371;
+    padding: 3% 7%;
+    text-align: center;
+}
+.social-icon{
+    margin: 20px 30px;
+}
+.logo{
+    text-decoration: none;
+    color: black;
+}
+.logo:hover{
+    text-decoration: none;
+    color:white;
+}
+.order{
+    padding:  7% 7%;
+}
